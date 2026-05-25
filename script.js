@@ -373,7 +373,7 @@ function checkAnswer() {
     const correct = currentQuote.author;
 
     if (isCloseEnough(guess, correct)) {
-        feedbackEl.textContent = "Richtig!";
+        feedbackEl.textContent = `Richtig! Die Antwort ist: ${currentQuote.author}`;
         feedbackEl.style.color = "#388e3c";
         score++;
     } else {
