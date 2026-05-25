@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zitate‑Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Zitate‑Quiz</h1>
+        <div id="game" class="game">
+            <p id="quote" class="quote">Klicke auf „Start“ um zu beginnen!</p>
+            <div id="hints" class="hints"></div>
+            <input type="text" id="guess-input" placeholder="Deine Antwort…" disabled>
+            <div class="buttons">
+                <button id="check-btn" disabled>Prüfen</button>
+                <button id="hint-btn" disabled>Tipp anzeigen</button>
+                <button id="next-btn" style="display:none;">Weiter</button>
+            </div>
+            <p id="feedback" class="feedback"></p>
+            <button id="start-btn">Start</button>
+            <p id="score" class="score"></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
