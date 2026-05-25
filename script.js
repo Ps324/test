@@ -258,8 +258,7 @@ let score = 0;
 
 const quoteEl = document.getElementById("quote");
 const hintsEl = document.getElementById("hints");
-const guessInput = document.getElementById("guess-input");
-const checkBtn = document.getElementById("check-btn");
+const answerOptionsEl = document.getElementById("answer-options");
 const hintBtn = document.getElementById("hint-btn");
 const nextBtn = document.getElementById("next-btn");
 const startBtn = document.getElementById("start-btn");
@@ -279,37 +278,35 @@ function loadNextQuote() {
     if (availableQuotes.length === 0) {
         quoteEl.textContent = "Du hast alle Zitate gelöst!";
         hintsEl.textContent = "";
-        guessInput.disabled = true;
-        checkBtn.disabled = true;
+        answerOptionsEl.innerHTML = "";
         hintBtn.disabled = true;
         nextBtn.style.display = "none";
         startBtn.textContent = "Neu starten";
         startBtn.style.display = "inline-block";
         feedbackEl.textContent = `Deine Endpunktzahl: ${score} / ${quotes.length}`;
+        feedbackEl.style.color = "#333";
         return;
     }
 
-    const idx = Math.floor(Math.random() * availableQuotes.length);
-    currentQuote = availableQuotes.splice(idx, 1)[0];
+    const randomIndex = Math.floor(Math.random() * availableQuotes.length);
+    currentQuote = availableQuotes.splice(randomIndex, 1)[0];
     hintIndex = 0;
 
     quoteEl.textContent = currentQuote.quote;
     hintsEl.textContent = "";
     feedbackEl.textContent = "";
-    guessInput.value = "";
-    guessInput.disabled = false;
-    checkBtn.disabled = false;
     hintBtn.disabled = false;
     nextBtn.style.display = "none";
     scoreEl.textContent = `Punkte: ${score}`;
-    guessInput.focus();
+
+    createAnswerOptions();
 }
 
 function showHint() {
     if (!currentQuote || hintIndex >= currentQuote.hints.length) return;
 
     const span = document.createElement("span");
-    span.textContent = currentQuote.hints[hintIndex] + " ";
+    span.textContent = currentQuote.hints[hintIndex];
     hintsEl.appendChild(span);
 
     hintIndex++;
@@ -319,82 +316,71 @@ function showHint() {
     }
 }
 
-function normalize(text) {
-    return text
-        .trim()
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[.,!?;:'"’‘”“\-]/g, "")
-        .replace(/\s+/g, " ");
+function createAnswerOptions() {
+    answerOptionsEl.innerHTML = "";
+
+    const correctAnswer = currentQuote.author;
+
+    const wrongAnswers = quotes
+        .map(item => item.author)
+        .filter(author => author !== correctAnswer);
+
+    const uniqueWrongAnswers = [...new Set(wrongAnswers)];
+    const shuffledWrongAnswers = shuffleArray(uniqueWrongAnswers);
+
+    const options = [
+        correctAnswer,
+        ...shuffledWrongAnswers.slice(0, 3)
+    ];
+
+    const shuffledOptions = shuffleArray(options);
+
+    shuffledOptions.forEach(option => {
+        const button = document.createElement("button");
+        button.textContent = option;
+        button.classList.add("answer-option");
+
+        button.addEventListener("click", () => {
+            checkAnswer(option, button);
+        });
+
+        answerOptionsEl.appendChild(button);
+    });
 }
 
-function levenshtein(a, b) {
-    const matrix = Array.from({ length: a.length + 1 }, () =>
-        Array(b.length + 1).fill(0)
-    );
-
-    for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
-    for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
-
-    for (let i = 1; i <= a.length; i++) {
-        for (let j = 1; j <= b.length; j++) {
-            const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-
-            matrix[i][j] = Math.min(
-                matrix[i - 1][j] + 1,
-                matrix[i][j - 1] + 1,
-                matrix[i - 1][j - 1] + cost
-            );
-        }
-    }
-
-    return matrix[a.length][b.length];
-}
-
-function isCloseEnough(guess, correct) {
-    guess = normalize(guess);
-    correct = normalize(correct);
-
-    if (guess === correct) return true;
-
-    const distance = levenshtein(guess, correct);
-
-    // erlaubt ungefähr 20 % Fehler, mindestens aber 1 Tippfehler
-    const allowedMistakes = Math.max(1, Math.floor(correct.length * 0.2));
-
-    return distance <= allowedMistakes;
-}
-
-function checkAnswer() {
+function checkAnswer(selectedAnswer, selectedButton) {
     if (!currentQuote) return;
 
-    const guess = guessInput.value;
     const correct = currentQuote.author;
+    const allButtons = document.querySelectorAll(".answer-option");
 
-    if (isCloseEnough(guess, correct)) {
+    allButtons.forEach(button => {
+        button.disabled = true;
+
+        if (button.textContent === correct) {
+            button.classList.add("correct");
+        }
+    });
+
+    if (selectedAnswer === correct) {
         feedbackEl.textContent = `Richtig! Die Antwort ist: ${currentQuote.author}`;
         feedbackEl.style.color = "#388e3c";
         score++;
     } else {
+        selectedButton.classList.add("wrong");
         feedbackEl.textContent = `Leider falsch. Richtige Antwort: ${currentQuote.author}`;
         feedbackEl.style.color = "#d32f2f";
     }
 
-    guessInput.disabled = true;
-    checkBtn.disabled = true;
     hintBtn.disabled = true;
     nextBtn.style.display = "inline-block";
     scoreEl.textContent = `Punkte: ${score}`;
 }
 
-guessInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !checkBtn.disabled) {
-        checkAnswer();
-    }
-});
+function shuffleArray(array) {
+    return [...array].sort(() => Math.random() - 0.5);
+}
 
 startBtn.addEventListener("click", startGame);
 hintBtn.addEventListener("click", showHint);
-checkBtn.addEventListener("click", checkAnswer);
 nextBtn.addEventListener("click", loadNextQuote);
