@@ -1,8 +1,53 @@
 const quotes = [
     {
-        quote: "Ich denke, also bin ich.",
+        quote: "Stay hungry, stay foolish.",
+        author: "Steve Jobs",
+        hints: ["🇺🇸", "💻", "🍎"],
+    },
+    {
+        quote: "Float like a butterfly, sting like a bee.",
+        author: "Muhammad Ali",
+        hints: ["🇺🇸", "🥊", "🦋"],
+    },
+    {
+        quote: "You miss 100% of the shots you don’t take.",
+        author: "Wayne Gretzky",
+        hints: ["🇨🇦", "🏒", "🥅"],
+    },
+    {
+        quote: "Imagination is more important than knowledge.",
+        author: "Albert Einstein",
+        hints: ["🇩🇪", "🔬", "🧠"],
+    },
+    {
+        quote: "That’s one small step for man, one giant leap for mankind.",
+        author: "Neil Armstrong",
+        hints: ["🇺🇸", "👨‍🚀", "🌕"],
+    },
+    {
+        quote: "The journey of a thousand miles begins with a single step.",
+        author: "Laozi",
+        hints: ["🇨🇳", "📜", "👣"],
+    },
+    {
+        quote: "The only true wisdom is in knowing you know nothing.",
+        author: "Socrates",
+        hints: ["🇬🇷", "🏛️", "🤔"],
+    },
+    {
+        quote: "Veni, vidi, vici.",
+        author: "Julius Caesar",
+        hints: ["🇮🇹", "⚔️", "🏛️"],
+    },
+    {
+        quote: "I think, therefore I am.",
         author: "René Descartes",
         hints: ["🇫🇷", "📚", "💭"],
+    },
+    {
+        quote: "To be, or not to be, that is the question.",
+        author: "William Shakespeare",
+        hints: ["🇬🇧", "🎭", "💀"],
     },
     {
         quote: "I have a dream.",
@@ -10,34 +55,199 @@ const quotes = [
         hints: ["🇺🇸", "🎤", "✊"],
     },
     {
-        quote: "Der Ball ist rund.",
-        author: "Sepp Herberger",
-        hints: ["🇩🇪", "⚽", "🏆"],
+        quote: "The future belongs to those who believe in the beauty of their dreams.",
+        author: "Eleanor Roosevelt",
+        hints: ["🇺🇸", "🏛️", "💭"],
     },
     {
-        quote: "To be, or not to be: that is the question.",
-        author: "William Shakespeare",
-        hints: ["🇬🇧", "🎭", "💀"],
+        quote: "Be yourself; everyone else is already taken.",
+        author: "Oscar Wilde",
+        hints: ["🇮🇪", "✍️", "🎭"],
     },
     {
-        quote: "Das ist ein kleiner Schritt für einen Menschen, aber ein riesiger Sprung für die Menschheit.",
-        author: "Neil Armstrong",
-        hints: ["🇺🇸", "👨‍🚀", "🌕"],
+        quote: "Not all those who wander are lost.",
+        author: "J. R. R. Tolkien",
+        hints: ["🇬🇧", "📖", "🧙"],
     },
     {
-        quote: "Energie = Masse mal Lichtgeschwindigkeit zum Quadrat.",
+        quote: "It does not do to dwell on dreams and forget to live.",
+        author: "J. K. Rowling",
+        hints: ["🇬🇧", "📖", "⚡"],
+    },
+    {
+        quote: "The way to get started is to quit talking and begin doing.",
+        author: "Walt Disney",
+        hints: ["🇺🇸", "🎬", "🐭"],
+    },
+    {
+        quote: "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+        author: "Nelson Mandela",
+        hints: ["🇿🇦", "🏛️", "🕊️"],
+    },
+    {
+        quote: "In the end, we will remember not the words of our enemies, but the silence of our friends.",
+        author: "Martin Luther King Jr.",
+        hints: ["🇺🇸", "🎤", "🤝"],
+    },
+    {
+        quote: "The important thing is not to stop questioning.",
         author: "Albert Einstein",
-        hints: ["🇩🇪", "🔬", "💡"],
+        hints: ["🇩🇪", "🔬", "❓"],
+    },
+    {
+        quote: "Life is what happens when you’re busy making other plans.",
+        author: "John Lennon",
+        hints: ["🇬🇧", "🎸", "🟡"],
+    },
+    {
+        quote: "The show must go on.",
+        author: "Freddie Mercury",
+        hints: ["🇬🇧", "🎤", "👑"],
+    },
+    {
+        quote: "No one can make you feel inferior without your consent.",
+        author: "Eleanor Roosevelt",
+        hints: ["🇺🇸", "🏛️", "💪"],
+    },
+    {
+        quote: "A person who never made a mistake never tried anything new.",
+        author: "Albert Einstein",
+        hints: ["🇩🇪", "🔬", "🧪"],
+    },
+    {
+        quote: "If you judge people, you have no time to love them.",
+        author: "Mother Teresa",
+        hints: ["🇦🇱", "🙏", "❤️"],
+    },
+    {
+        quote: "Peace begins with a smile.",
+        author: "Mother Teresa",
+        hints: ["🇦🇱", "🙏", "😊"],
     },
     {
         quote: "The only thing we have to fear is fear itself.",
         author: "Franklin D. Roosevelt",
-        hints: ["🇺🇸", "🏛️", "😱"],
+        hints: ["🇺🇸", "🏛️", "😨"],
     },
     {
-        quote: "In der Mitte der Schwierigkeit liegt die Möglichkeit.",
-        author: "Albert Einstein",
-        hints: ["🇩🇪", "🔬", "✨"],
+        quote: "Ask not what your country can do for you; ask what you can do for your country.",
+        author: "John F. Kennedy",
+        hints: ["🇺🇸", "🏛️", "🌎"],
+    },
+    {
+        quote: "That which does not kill us makes us stronger.",
+        author: "Friedrich Nietzsche",
+        hints: ["🇩🇪", "📚", "💪"],
+    },
+    {
+        quote: "Without music, life would be a mistake.",
+        author: "Friedrich Nietzsche",
+        hints: ["🇩🇪", "📚", "🎵"],
+    },
+    {
+        quote: "The secret of getting ahead is getting started.",
+        author: "Mark Twain",
+        hints: ["🇺🇸", "✍️", "🚀"],
+    },
+    {
+        quote: "If you tell the truth, you don’t have to remember anything.",
+        author: "Mark Twain",
+        hints: ["🇺🇸", "✍️", "🤥"],
+    },
+    {
+        quote: "I am the one who knocks.",
+        author: "Walter White",
+        hints: ["🇺🇸", "📺", "🧪"],
+    },
+    {
+        quote: "May the Force be with you.",
+        author: "Obi-Wan Kenobi",
+        hints: ["🌌", "🎬", "⚔️"],
+    },
+    {
+        quote: "I’ll be back.",
+        author: "Arnold Schwarzenegger",
+        hints: ["🇦🇹", "🎬", "🤖"],
+    },
+    {
+        quote: "Why so serious?",
+        author: "The Joker",
+        hints: ["🇺🇸", "🎬", "🃏"],
+    },
+    {
+        quote: "Elementary, my dear Watson.",
+        author: "Sherlock Holmes",
+        hints: ["🇬🇧", "📖", "🔍"],
+    },
+    {
+        quote: "It always seems impossible until it’s done.",
+        author: "Nelson Mandela",
+        hints: ["🇿🇦", "🏛️", "✅"],
+    },
+    {
+        quote: "The purpose of our lives is to be happy.",
+        author: "Dalai Lama",
+        hints: ["🇹🇼", "🙏", "☸️"],
+    },
+    {
+        quote: "Do or do not. There is no try.",
+        author: "Yoda",
+        hints: ["🌌", "🎬", "🟢"],
+    },
+    {
+        quote: "I’m gonna make him an offer he can’t refuse.",
+        author: "Vito Corleone",
+        hints: ["🇮🇹", "🎬", "🍊"],
+    },
+    {
+        quote: "Houston, we have a problem.",
+        author: "Jim Lovell",
+        hints: ["🇺🇸", "👨‍🚀", "🚀"],
+    },
+    {
+        quote: "Power tends to corrupt, and absolute power corrupts absolutely.",
+        author: "Lord Acton",
+        hints: ["🇬🇧", "📚", "👑"],
+    },
+    {
+        quote: "Genius is one percent inspiration and ninety-nine percent perspiration.",
+        author: "Thomas Edison",
+        hints: ["🇺🇸", "💡", "⚙️"],
+    },
+    {
+        quote: "The unexamined life is not worth living.",
+        author: "Socrates",
+        hints: ["🇬🇷", "🏛️", "🔎"],
+    },
+    {
+        quote: "Simplicity is the ultimate sophistication.",
+        author: "Leonardo da Vinci",
+        hints: ["🇮🇹", "🎨", "🪽"],
+    },
+    {
+        quote: "I came, I saw, I conquered.",
+        author: "Julius Caesar",
+        hints: ["🇮🇹", "⚔️", "👑"],
+    },
+    {
+        quote: "The pen is mightier than the sword.",
+        author: "Edward Bulwer-Lytton",
+        hints: ["🇬🇧", "✍️", "🖋️"],
+    },
+    {
+        quote: "Knowledge is power.",
+        author: "Francis Bacon",
+        hints: ["🇬🇧", "📚", "🧠"],
+    },
+    {
+        quote: "Time is money.",
+        author: "Benjamin Franklin",
+        hints: ["🇺🇸", "⚡", "⏰"],
+    },
+    {
+        quote: "Cogito, ergo sum.",
+        author: "René Descartes",
+        hints: ["🇫🇷", "📚", "💭"],
     },
 ];
 
